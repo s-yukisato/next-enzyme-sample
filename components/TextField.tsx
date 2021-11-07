@@ -7,6 +7,7 @@ const TextField = () => {
   return (
     <div>
       <input type="text" value={text} onChange={handleChange} />
+      <p className="text">{text}</p>
     </div>
   );
 };

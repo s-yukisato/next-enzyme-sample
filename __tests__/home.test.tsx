@@ -1,12 +1,18 @@
-import { shallow } from "enzyme";
 import React from "react";
+import { shallow, ShallowWrapper } from "enzyme";
 import Home from "../pages/index";
 
+describe("Home page", () => {
+  let wrapper: ShallowWrapper;
+  beforeEach(() => {
+    wrapper = shallow(<Home />);
+  });
 
-test("test", () => {
-  const component = shallow(<Home />);
+  it('renders h1 correctly', () => {
+    expect(wrapper.find("h1").text()).toEqual("Welcome to Next.js!");
+  });
 
-  expect(component.find("h1").text()).toEqual("Welcome to Next.js!");
-
-  expect(component.find("h2").first().text()).toEqual('Documentation →');
+  it('一つ目の見出しがあるか', () => {
+    expect(wrapper.find("h2").first().text()).toEqual("Documentation →");
+  })
 });

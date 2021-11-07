@@ -1,15 +1,27 @@
-import React from 'react';
-import {shallow} from 'enzyme';
-import TextField from '../components/TextField'
+import React from "react";
+import { mount, ReactWrapper } from "enzyme";
+import TextField from "../components/TextField";
 
+describe("TextField", () => {
+  let textFieldWrapper: ReactWrapper;
+  beforeEach(() => {
+    textFieldWrapper = mount(<TextField />);
+  });
 
-test('Whether the text field changes', () => {
-    const component = shallow(<TextField />)
+  afterEach(() => {
+    textFieldWrapper.unmount();
+  });
 
-    const textField = component.find('input')
-    expect(textField.get(0).props.value).toEqual('test')
+  it("Whether the text field changes", () => {
+    const textField = textFieldWrapper.find("input");
+    expect(textField.prop('value')).toEqual("test");
+  
+    textField.simulate("change", { target: { value: "Hello" } });
+    textFieldWrapper.update();
 
-    textField.simulate('change', { target: { value: 'Hello' } })
+    const result = textFieldWrapper.find(".text");
+    expect(result.text()).toEqual("Hello")
+  
+  });
+});
 
-    expect(textField.get(0).props.value).toEqual('Hello');
-})

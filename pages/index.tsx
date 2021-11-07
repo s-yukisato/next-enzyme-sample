@@ -4,8 +4,10 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import TextField from '../components/TextField'
+import { useCounter } from "../hooks/useCounter";
 
 const Home: NextPage = () => {
+  const {count, increment} = useCounter(1);
   return (
     <div className={styles.container}>
       <Head>
